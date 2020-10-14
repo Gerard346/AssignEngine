@@ -32,6 +32,7 @@
 #ifdef MATH_BULLET_INTEROP
 #include "../../../Bullet/include/LinearMath/btQuaternion.h"
 #endif
+
 /*
 #ifdef MATH_IRRLICHT_INTEROP
 #include "Quaternion.h"

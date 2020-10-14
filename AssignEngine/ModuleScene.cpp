@@ -54,7 +54,7 @@ bool ModuleScene::CleanUp()
 // Update: draw background
 update_status ModuleScene::Update(float dt)
 {
-	Plane(0, 1, 0, 0).Render();
+	Plane_Obj(0, 1, 0, 0).Render();
 	
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplSDL2_NewFrame(App->window->window);
