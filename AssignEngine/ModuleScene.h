@@ -23,4 +23,11 @@ public:
 
 	SDL_Texture* graphics;
 	PhysBody3D* ground;
+
+private:
+	bool rng_intT = true;
+	int rng_int = 0;
+	float rng_float = 0.0f;
+
+	LCG rng_generator;
 };
