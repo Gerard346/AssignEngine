@@ -40,6 +40,9 @@
     <Filter Include="Sources\Modules\MathGeoLib\Time">
       <UniqueIdentifier>{b1eec8c0-0983-4b15-9485-990c6dbd716b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Modules\Parson">
+      <UniqueIdentifier>{6a310c77-8c3c-41ac-8f7d-1a9b2da313bf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
@@ -300,6 +303,9 @@
     <ClInclude Include="MathGeoLib\include\MathGeoLibFwd.h">
       <Filter>Sources\Modules\MathGeoLib</Filter>
     </ClInclude>
+    <ClInclude Include="Parson\parson.h">
+      <Filter>Sources\Modules\Parson</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleCamera3D.cpp">
@@ -451,6 +457,9 @@
     </ClCompile>
     <ClCompile Include="MathGeoLib\include\Time\Clock.cpp">
       <Filter>Sources\Modules\MathGeoLib\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="Parson\parson.c">
+      <Filter>Sources\Modules\Parson</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
