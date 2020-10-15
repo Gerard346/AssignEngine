@@ -168,6 +168,7 @@ Sphere::Sphere(float radius) : Primitive(), radius(radius)
 
 void Sphere::InnerRender() const
 {
+	//glutSolidSphere(radius, 25, 25);
 }
 
 
