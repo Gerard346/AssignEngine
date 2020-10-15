@@ -1,6 +1,5 @@
 #pragma once
 
-#include "p2List.h"
 #include "Globals.h"
 #include "Module.h"
 #include "ModuleWindow.h"
@@ -8,7 +7,7 @@
 #include "ModuleScene.h"
 #include "ModuleRenderer3D.h"
 #include "ModuleCamera3D.h"
-
+#include <list>
 class Application
 {
 public:
@@ -21,7 +20,7 @@ public:
 private:
 
 	float	dt;
-	p2List<Module*> list_modules;
+	std::list<Module*> list_modules;
 
 public:
 
