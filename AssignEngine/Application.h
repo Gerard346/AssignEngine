@@ -8,6 +8,7 @@
 #include "ModuleRenderer3D.h"
 #include "ModuleCamera3D.h"
 #include <list>
+#include "Parson/parson.h"
 
 class Application
 {
@@ -18,8 +19,9 @@ public:
 	ModuleRenderer3D* renderer3D;
 	ModuleCamera3D* camera;
 
-private:
 
+private:
+	
 	float	dt;
 	std::list<Module*> list_modules;
 
@@ -32,11 +34,14 @@ public:
 	update_status Update();
 	bool CleanUp();
 
+	JSON_Value* config_value;
+	JSON_Object* config_object;
+
 private:
 
 	void AddModule(Module* mod);
 	void PrepareUpdate();
 	void FinishUpdate();
-	void CreatingJson();
+	void CreatingConfigJSON();
 	void LoadingData();
 };

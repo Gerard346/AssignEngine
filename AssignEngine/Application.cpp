@@ -1,5 +1,4 @@
 #include "Application.h"
-#include "Parson/parson.h"
 
 Application::Application()
 {
@@ -38,7 +37,18 @@ bool Application::Init()
 {
 	bool ret = true;
 
-	CreatingJson();
+	config_value = json_parse_file("config.json");
+
+	if (config_value != NULL) {
+		config_object = json_value_get_object(config_value);
+		LOG("Config file loaded successfully");
+	}
+	else {
+		LOG("Config file not found. Creating one instead.");
+		CreatingConfigJSON();
+
+	}
+
 	LoadingData();
 
 	// Call Init() in all modules
@@ -73,7 +83,7 @@ void Application::FinishUpdate()
 {
 }
 
-void Application::CreatingJson()
+void Application::CreatingConfigJSON()
 {
 	JSON_Value* root_value = json_value_init_object();
 	JSON_Object* root_object = json_value_get_object(root_value);
@@ -84,7 +94,7 @@ void Application::CreatingJson()
 	json_object_dotset_value(root_object, "contact.emails", json_parse_string("[\"email@example.com\",\"email2@example.com\"]"));
 	serialized_string = json_serialize_to_string_pretty(root_value);
 	puts(serialized_string);
-	json_serialize_to_file(root_value, "user_data.json");
+	json_serialize_to_file(root_value, "config.json");
 	json_free_serialized_string(serialized_string);
 	json_value_free(root_value);
 }
