@@ -38,4 +38,5 @@ private:
 	void PrepareUpdate();
 	void FinishUpdate();
 	void CreatingJson();
+	void LoadingData();
 };
