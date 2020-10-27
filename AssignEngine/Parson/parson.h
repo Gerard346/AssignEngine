@@ -243,6 +243,10 @@ size_t          json_string_len(const JSON_Value *value); /* doesn't account for
 double          json_number (const JSON_Value *value);
 int             json_boolean(const JSON_Value *value);
 
+//Test
+
+void serialization_example();
+
 #ifdef __cplusplus
 }
 #endif

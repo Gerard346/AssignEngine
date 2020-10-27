@@ -8,6 +8,7 @@
 #include "ModuleRenderer3D.h"
 #include "ModuleCamera3D.h"
 #include <list>
+
 class Application
 {
 public:
@@ -36,4 +37,5 @@ private:
 	void AddModule(Module* mod);
 	void PrepareUpdate();
 	void FinishUpdate();
+	void CreatingJson();
 };

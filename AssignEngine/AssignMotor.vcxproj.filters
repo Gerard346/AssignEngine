@@ -458,7 +458,7 @@
     <ClCompile Include="MathGeoLib\include\Time\Clock.cpp">
       <Filter>Sources\Modules\MathGeoLib\Time</Filter>
     </ClCompile>
-    <ClCompile Include="Parson\parson.c">
+    <ClCompile Include="Parson\parson.cpp">
       <Filter>Sources\Modules\Parson</Filter>
     </ClCompile>
   </ItemGroup>
