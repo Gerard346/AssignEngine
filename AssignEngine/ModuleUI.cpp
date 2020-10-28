@@ -35,7 +35,7 @@ bool ModuleUI::Start()
 	ImGui_ImplSDL2_InitForOpenGL(App->window->window, App->renderer3D->context);
 
 	UIManager.push_back(new WindowBar());
-	UIManager[MenuBar]->isActive[0].isActivate = true;
+	UIManager[WindowsType::MenuBar]->isActive[0].isActivate = true;
 
 	std::vector<ModuleUIManager*>::iterator ui_windows = UIManager.begin();
 

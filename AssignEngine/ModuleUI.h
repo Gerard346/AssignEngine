@@ -6,10 +6,7 @@
 #include "ModuleUIManager.h"
 
 enum WindowsType {
-	MenuBar,
-	Console,
-	Configuration,
-	About
+	MenuBar
 };
 
 class ModuleUI : public Module {
