@@ -43,6 +43,9 @@
     <Filter Include="Sources\Modules\Parson">
       <UniqueIdentifier>{6a310c77-8c3c-41ac-8f7d-1a9b2da313bf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Modules\UI\UIWindows">
+      <UniqueIdentifier>{1224faf6-8117-4cf6-93cd-903a92d816f2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
@@ -306,6 +309,24 @@
     <ClInclude Include="Parson\parson.h">
       <Filter>Sources\Modules\Parson</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleUI.h">
+      <Filter>Sources\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleUIManager.h">
+      <Filter>Sources\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowBar.h">
+      <Filter>Sources\Modules\UI\UIWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowAbout.h">
+      <Filter>Sources\Modules\UI\UIWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowConfiguration.h">
+      <Filter>Sources\Modules\UI\UIWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowConsole.h">
+      <Filter>Sources\Modules\UI\UIWindows</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleCamera3D.cpp">
@@ -460,6 +481,21 @@
     </ClCompile>
     <ClCompile Include="Parson\parson.cpp">
       <Filter>Sources\Modules\Parson</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleUI.cpp">
+      <Filter>Sources\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowBar.cpp">
+      <Filter>Sources\Modules\UI\UIWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowAbout.cpp">
+      <Filter>Sources\Modules\UI\UIWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowConfiguration.cpp">
+      <Filter>Sources\Modules\UI\UIWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowConsole.cpp">
+      <Filter>Sources\Modules\UI\UIWindows</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

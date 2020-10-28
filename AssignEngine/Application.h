@@ -7,6 +7,7 @@
 #include "ModuleScene.h"
 #include "ModuleRenderer3D.h"
 #include "ModuleCamera3D.h"
+#include "ModuleUI.h"
 #include <list>
 #include "Parson/parson.h"
 
@@ -18,7 +19,7 @@ public:
 	ModuleScene* scene;
 	ModuleRenderer3D* renderer3D;
 	ModuleCamera3D* camera;
-
+	ModuleUI* ui;
 
 private:
 	
