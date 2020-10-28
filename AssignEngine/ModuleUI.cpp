@@ -3,6 +3,7 @@
 #include "ModuleUI.h"
 #include "imgui\imgui.h"
 #include "SDL\include\SDL.h"
+#include "WindowBar.h"
 
 #include "ImGui/imgui.h"
 #include "ImGui/imgui_impl_opengl3.h"
@@ -33,6 +34,15 @@ bool ModuleUI::Start()
 	ImGui_ImplOpenGL3_Init();
 	ImGui_ImplSDL2_InitForOpenGL(App->window->window, App->renderer3D->context);
 
+	UIManager.push_back(new WindowBar());
+	UIManager[MenuBar]->isActive[0].isActivate = true;
+
+	std::vector<ModuleUIManager*>::iterator ui_windows = UIManager.begin();
+
+	for (int i = 0; i < UIManager.size(); i++) {
+		ui_windows[i]->Start();
+	}
+
 	return true;
 }
 
@@ -42,6 +52,9 @@ update_status ModuleUI::Update(float dt)
 	ImGui_ImplSDL2_NewFrame(App->window->window);
 	ImGui::NewFrame();
 
+	UpdateUI(dt);
+
+	/*
 	//	RNG Generator
 
 	ImGui::Begin("RNG Generator");
@@ -77,17 +90,7 @@ update_status ModuleUI::Update(float dt)
 	}
 
 	ImGui::End();
-
-	//Show demo window
-	ImGui::ShowDemoWindow();
-
-	//Quit
-	ImGui::Begin("Quit");
-	if (ImGui::Button("Exit")) {
-		return UPDATE_STOP;
-	}
-	ImGui::End();
-
+	*/
 	//Render
 	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
@@ -108,4 +111,13 @@ bool ModuleUI::CleanUp()
 	SDL_Quit();
 
 	return true;
+}
+
+void ModuleUI::UpdateUI(float dt)
+{
+	std::vector<ModuleUIManager*>::iterator ui_windows = UIManager.begin();
+
+	for (int i = 0; i < UIManager.size(); i++) {
+		ui_windows[i]->Update(dt);
+	}
 }

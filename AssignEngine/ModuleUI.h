@@ -25,15 +25,16 @@ public:
 
 public:
 
-	std::vector<ModuleUIManager> UIManager;
+	std::vector<ModuleUIManager*> UIManager;
 
 private:
+	void UpdateUI(float dt);
 
-	bool rng_intT = true;
+	/*bool rng_intT = true;
 	int rng_int = 0;
 	float rng_float = 0.0f;
 
-	LCG rng_generator;
+	LCG rng_generator;*/
 };
 
 #endif // !_MODULE_UI
