@@ -315,12 +315,6 @@
     <ClInclude Include="ModuleUIManager.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
-    <ClInclude Include="WindowBar.h">
-      <Filter>Sources\Modules\UI\UIWindows</Filter>
-    </ClInclude>
-    <ClInclude Include="WindowAbout.h">
-      <Filter>Sources\Modules\UI\UIWindows</Filter>
-    </ClInclude>
     <ClInclude Include="WindowConfiguration.h">
       <Filter>Sources\Modules\UI\UIWindows</Filter>
     </ClInclude>
@@ -340,9 +334,6 @@
     </ClCompile>
     <ClCompile Include="ModuleWindow.cpp">
       <Filter>Sources\Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="log.cpp">
-      <Filter>Sources\Tools</Filter>
     </ClCompile>
     <ClCompile Include="Application.cpp">
       <Filter>Sources</Filter>
@@ -485,17 +476,14 @@
     <ClCompile Include="ModuleUI.cpp">
       <Filter>Sources\Modules</Filter>
     </ClCompile>
-    <ClCompile Include="WindowBar.cpp">
-      <Filter>Sources\Modules\UI\UIWindows</Filter>
-    </ClCompile>
-    <ClCompile Include="WindowAbout.cpp">
-      <Filter>Sources\Modules\UI\UIWindows</Filter>
-    </ClCompile>
     <ClCompile Include="WindowConfiguration.cpp">
       <Filter>Sources\Modules\UI\UIWindows</Filter>
     </ClCompile>
     <ClCompile Include="WindowConsole.cpp">
       <Filter>Sources\Modules\UI\UIWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="log.cpp">
+      <Filter>Sources\Tools</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

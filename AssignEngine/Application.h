@@ -8,6 +8,7 @@
 #include "ModuleRenderer3D.h"
 #include "ModuleCamera3D.h"
 #include "ModuleUI.h"
+#include "WindowConsole.h"
 #include <list>
 #include "Parson/parson.h"
 
@@ -20,7 +21,7 @@ public:
 	ModuleRenderer3D* renderer3D;
 	ModuleCamera3D* camera;
 	ModuleUI* ui;
-
+	WindowConsole* console;
 private:
 	
 	float	dt;
@@ -46,3 +47,5 @@ private:
 	void CreatingConfigJSON();
 	void LoadingData();
 };
+
+extern Application* App;

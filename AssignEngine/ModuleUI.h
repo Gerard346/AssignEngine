@@ -6,7 +6,7 @@
 #include "ModuleUIManager.h"
 
 enum WindowsType {
-	MenuBar
+	Console
 };
 
 class ModuleUI : public Module {
@@ -17,7 +17,11 @@ public:
 	~ModuleUI();
 
 	bool Start();
+
+	update_status PreUpdate(float dt);
 	update_status Update(float dt);
+	update_status PostUpdate(float dt);
+
 	bool CleanUp();
 
 public:
@@ -26,7 +30,7 @@ public:
 
 private:
 	void UpdateUI(float dt);
-
+	void DrawUIBar();
 	/*bool rng_intT = true;
 	int rng_int = 0;
 	float rng_float = 0.0f;
