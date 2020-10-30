@@ -31,6 +31,10 @@ public:
 private:
 	void UpdateUI(float dt);
 	void DrawUIBar();
+	void Dockspace(bool*);
+
+private:
+	bool* p_open;
 	/*bool rng_intT = true;
 	int rng_int = 0;
 	float rng_float = 0.0f;
