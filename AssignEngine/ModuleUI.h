@@ -4,6 +4,7 @@
 #include "Module.h"
 #include "Globals.h"
 #include "ModuleUIManager.h"
+#include "MathGeoLib/include/Algorithm/Random/LCG.h"
 
 enum WindowsType {
 	Console
@@ -35,11 +36,12 @@ private:
 
 private:
 	bool* p_open;
-	/*bool rng_intT = true;
+	bool rng_intT = true;
+
 	int rng_int = 0;
 	float rng_float = 0.0f;
 
-	LCG rng_generator;*/
+	LCG rng_generator;
 };
 
 #endif // !_MODULE_UI

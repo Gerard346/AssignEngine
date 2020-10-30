@@ -9,7 +9,6 @@
 #include "ImGui/imgui_impl_sdl.h"
 #include "Glew/include/glew.h"
 
-#include "MathGeoLib/include/Algorithm/Random/LCG.h"
 
 #include "WindowConsole.h"
 
@@ -39,13 +38,13 @@ bool ModuleUI::Start()
 	//ImGui::StyleColorsClassic();
 	ImGui_ImplOpenGL3_Init();
 	ImGui_ImplSDL2_InitForOpenGL(App->window->window, App->renderer3D->context);
-	/*
+	
 	std::vector<ModuleUIManager*>::iterator ui_windows = UIManager.begin();
 
 	for (int i = 0; i < UIManager.size(); i++) {
 		ui_windows[i]->Start();
 	}
-	*/
+	
 	return true;
 }
 
@@ -54,20 +53,19 @@ update_status ModuleUI::PreUpdate(float dt)
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplSDL2_NewFrame(App->window->window);
 	ImGui::NewFrame();
+	
+	Dockspace(p_open);
 
 	return UPDATE_CONTINUE;
 }
 
 update_status ModuleUI::Update(float dt)
 {
-	Dockspace(p_open);
-
 	ImGui::ShowDemoWindow();
 
 	DrawUIBar();
 	UpdateUI(dt);
-
-	/*
+	
 	//	RNG Generator
 
 	ImGui::Begin("RNG Generator");
@@ -103,7 +101,7 @@ update_status ModuleUI::Update(float dt)
 	}
 
 	ImGui::End();
-	*/
+	
 	//Render
 	
 	return UPDATE_CONTINUE;
