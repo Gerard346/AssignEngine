@@ -36,7 +36,7 @@ bool ModuleScene::CleanUp()
 update_status ModuleScene::Update(float dt)
 {
 	Plane_Obj(0, 1, 0, 0).Render();
-	
+	/*
 	static const GLfloat vertex[] = {
 		0,0,0,
 		10,0,0,
@@ -88,6 +88,10 @@ update_status ModuleScene::Update(float dt)
 	glDrawElements(GL_TRIANGLES, (sizeof(index) / sizeof(GLuint)), GL_UNSIGNED_INT, NULL);
 
 	glDisableClientState(GL_VERTEX_ARRAY);
+	*/
+	if (App->input->GetKey(SDL_SCANCODE_L) == KEY_UP) {
+		App->mesh->LoadFBX("Assets/BakerHouse.fbx");
+	}
 
 	return UPDATE_CONTINUE;
 }

@@ -9,6 +9,7 @@
 #include "ModuleCamera3D.h"
 #include "ModuleUI.h"
 #include "WindowConsole.h"
+#include "ModuleMesh3D.h"
 #include <list>
 #include "Parson/parson.h"
 #include "Timer.h"
@@ -22,6 +23,7 @@ public:
 	ModuleCamera3D* camera;
 	ModuleUI* ui;
 	WindowConsole* console;
+	ModuleMesh3D* mesh;
 private:
 	
 	Timer				time_since_startup;
