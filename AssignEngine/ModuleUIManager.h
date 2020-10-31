@@ -7,9 +7,6 @@ struct Activate {
 
 	bool isActivate = false;
 
-	bool isActive() {
-		return isActivate;
-	}
 	void OpenWindow() {
 		isActivate = true;
 	}

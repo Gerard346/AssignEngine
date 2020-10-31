@@ -7,7 +7,7 @@
 #include "MathGeoLib/include/Algorithm/Random/LCG.h"
 
 enum WindowsType {
-	Console
+	Congifuration_Window
 };
 
 class ModuleUI : public Module {
@@ -23,6 +23,7 @@ public:
 	update_status Update(float dt);
 	update_status PostUpdate(float dt);
 
+	void DrawUI(float dt);
 	bool CleanUp();
 
 public:

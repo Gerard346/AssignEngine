@@ -24,7 +24,7 @@ private:
 	void CalculateViewMatrix();
 
 public:
-
+	Color background;
 	vec3 X, Y, Z, Position, Reference;
 
 private:

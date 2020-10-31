@@ -41,6 +41,9 @@ Application::~Application()
 bool Application::Init()
 {
 	bool ret = true;
+	//max_fps = 60;
+
+	frame_time.Start();
 
 	config_value = json_parse_file("config.json");
 
@@ -48,10 +51,10 @@ bool Application::Init()
 		config_object = json_value_get_object(config_value);
 		LOG("Config file loaded successfully");
 	}
+
 	else {
 		LOG("Config file not found. Creating one instead.");
 		CreatingConfigJSON();
-
 	}
 
 	LoadingData();
@@ -81,11 +84,36 @@ bool Application::Init()
 // ---------------------------------------------
 void Application::PrepareUpdate()
 {
+	dt = frame_time.ReadSec();
+	if (dt > 0.2f) {
+		dt = 0.0f;
+	}
+
+	last_frame_ms = dt * 1000;
+	frame_time.Start();
+
+	frame_count += 1;
+	curr_frames += 1;
+
+	if (timer_psec.Read() >= 1000) {
+		frames_on_last_update = curr_frames;
+		curr_frames = 0;
+		timer_psec.Start();
+	}
 }
 
 // ---------------------------------------------
 void Application::FinishUpdate()
 {
+	avg_fps = (float)frame_count / fps_timer.ReadSec();
+
+	if (is_fps_capped) {
+		float delay = (1000 / capped_frames) - frame_time.Read();
+
+		if (delay > 0 && delay < 9000) {
+			SDL_Delay(delay);
+		}
+	}
 }
 
 void Application::CreatingConfigJSON()
@@ -167,6 +195,16 @@ bool Application::CleanUp()
 		item++;
 	}
 	return ret;
+}
+
+float Application::GetFPS()
+{
+	return frames_on_last_update;
+}
+
+float Application::GetMS()
+{
+	return last_frame_ms;
 }
 
 void Application::AddModule(Module* mod)

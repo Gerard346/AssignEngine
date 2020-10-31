@@ -1,12 +1,17 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleRenderer3D.h"
+#include "ModuleUI.h"
+
+#include "Glew/include/glew.h"
 #include "SDL\include\SDL_opengl.h"
+
 #include <gl/GL.h>
 #include <gl/GLU.h>
 
 #pragma comment (lib, "glu32.lib")    /* link OpenGL Utility lib     */
 #pragma comment (lib, "opengl32.lib") /* link Microsoft OpenGL lib   */
+#pragma comment (lib, "glew/libx86/glew32.lib")
 
 ModuleRenderer3D::ModuleRenderer3D(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -28,6 +33,16 @@ bool ModuleRenderer3D::Init()
 	{
 		LOG("OpenGL context could not be created! SDL_Error: %s\n", SDL_GetError());
 		ret = false;
+	}
+
+	//Init Glew
+	GLenum err = glewInit();
+
+	if (err != GL_NO_ERROR) {
+		LOG("Couldn't load glew library.");
+	}
+	else {
+		LOG("Init Glew loaded correctly. Version: %d.%d.%d", GLEW_VERSION_MAJOR, GLEW_VERSION_MINOR, GLEW_VERSION_MICRO);
 	}
 
 	if (ret == true)
@@ -89,11 +104,17 @@ bool ModuleRenderer3D::Init()
 		GLfloat MaterialDiffuse[] = { 1.0f, 1.0f, 1.0f, 1.0f };
 		glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, MaterialDiffuse);
 
+		glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
 		glEnable(GL_DEPTH_TEST);
 		glEnable(GL_CULL_FACE);
-		lights[0].Active(true);
 		glEnable(GL_LIGHTING);
 		glEnable(GL_COLOR_MATERIAL);
+		glEnable(GL_TEXTURE_2D);
+		glEnable(GL_POLYGON_SMOOTH);
+
+		lights[0].Active(true);
+
+
 	}
 
 	// Projection matrix for
@@ -101,12 +122,20 @@ bool ModuleRenderer3D::Init()
 
 	App->camera->Look(vec3(1.75f, 1.75f, 5.0f), vec3(0.0f, 0.0f, 0.0f));
 
+	//LOG
+	LOG("Vendor: %s", glGetString(GL_VENDOR));
+	LOG("Renderer: %s", glGetString(GL_RENDER));
+	LOG("OpenGL version supported %s", glGetString(GL_VERSION));
+	LOG("GLSL: %s\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
+
 	return ret;
 }
 
 // PreUpdate: clear buffer
 update_status ModuleRenderer3D::PreUpdate(float dt)
 {
+	Color c = App->camera->background;
+	glClearColor(c.r,c.g,c.b,c.a);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
 
@@ -125,13 +154,16 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 // Update: debug camera
 update_status ModuleRenderer3D::Update(float dt)
 {
+	Draw();
 	return UPDATE_CONTINUE;
 }
 
 // PostUpdate present buffer to screen
 update_status ModuleRenderer3D::PostUpdate(float dt)
 {
+	App->ui->DrawUI(dt);
 	SDL_GL_SwapWindow(App->window->window);
+
 	return UPDATE_CONTINUE;
 }
 
@@ -143,6 +175,10 @@ bool ModuleRenderer3D::CleanUp()
 	SDL_GL_DeleteContext(context);
 
 	return true;
+}
+
+void ModuleRenderer3D::Draw()
+{
 }
 
 

@@ -15,4 +15,12 @@ public:
 	bool CleanUp();
 
 private:
+	void Draw(const char*, bool*);
+
+private:
+	const char* name_engine;
+	const char* name_organization;
+
+	std::vector<float> fps_log;
+	std::vector<float> ms_log;
 };

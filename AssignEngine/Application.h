@@ -11,7 +11,7 @@
 #include "WindowConsole.h"
 #include <list>
 #include "Parson/parson.h"
-
+#include "Timer.h"
 class Application
 {
 public:
@@ -24,7 +24,21 @@ public:
 	WindowConsole* console;
 private:
 	
-	float	dt;
+	Timer				time_since_startup;
+	Timer				frame_time;
+	Timer				fps_timer;
+	Timer				timer_psec;
+	uint				capped_frames;
+	uint32_t			curr_frames = NULL;
+	float				avg_fps = 0.0f;
+	float				seconds_since_startup = 0.0f;
+	uint64_t			frame_count = 0.0f;
+	uint32_t			last_frame_ms = 0.0f;
+	uint32_t			frames_on_last_update = 0.0f;
+	float				dt;
+
+	bool is_fps_capped = true;
+
 	std::list<Module*> list_modules;
 
 public:
@@ -35,6 +49,9 @@ public:
 	bool Init();
 	update_status Update();
 	bool CleanUp();
+
+	float GetFPS();
+	float GetMS();
 
 	JSON_Value* config_value;
 	JSON_Object* config_object;

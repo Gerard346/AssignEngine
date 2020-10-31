@@ -321,6 +321,9 @@
     <ClInclude Include="WindowConsole.h">
       <Filter>Sources\Modules\UI\UIWindows</Filter>
     </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>Sources\Tools</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleCamera3D.cpp">
@@ -483,6 +486,9 @@
       <Filter>Sources\Modules\UI\UIWindows</Filter>
     </ClCompile>
     <ClCompile Include="log.cpp">
+      <Filter>Sources\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
       <Filter>Sources\Tools</Filter>
     </ClCompile>
   </ItemGroup>

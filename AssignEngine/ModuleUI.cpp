@@ -7,9 +7,8 @@
 #include "Imgui/imgui_internal.h"
 #include "ImGui/imgui_impl_opengl3.h"
 #include "ImGui/imgui_impl_sdl.h"
-#include "Glew/include/glew.h"
 
-
+#include "WindowConfiguration.h"
 #include "WindowConsole.h"
 
 ModuleUI::ModuleUI(Application* app, bool start_enabled) : Module(app, start_enabled)
@@ -22,9 +21,6 @@ ModuleUI::~ModuleUI()
 
 bool ModuleUI::Start()
 {
-	//Init Glew
-	glewInit();
-
 	//Setup Dear ImGui Context
 	ImGui::CreateContext();
 
@@ -39,6 +35,10 @@ bool ModuleUI::Start()
 	ImGui_ImplOpenGL3_Init();
 	ImGui_ImplSDL2_InitForOpenGL(App->window->window, App->renderer3D->context);
 	
+	UIManager.push_back(new WindowConfiguration());
+
+	UIManager[Congifuration_Window]->isActive[0].isActivate = false;
+
 	std::vector<ModuleUIManager*>::iterator ui_windows = UIManager.begin();
 
 	for (int i = 0; i < UIManager.size(); i++) {
@@ -61,11 +61,25 @@ update_status ModuleUI::PreUpdate(float dt)
 
 update_status ModuleUI::Update(float dt)
 {
+	
+	
+	return UPDATE_CONTINUE;
+}
+
+update_status ModuleUI::PostUpdate(float dt)
+{
+	
+	
+	return UPDATE_CONTINUE;
+}
+
+void ModuleUI::DrawUI(float dt)
+{
 	ImGui::ShowDemoWindow();
 
 	DrawUIBar();
 	UpdateUI(dt);
-	
+
 	//	RNG Generator
 
 	ImGui::Begin("RNG Generator");
@@ -101,17 +115,9 @@ update_status ModuleUI::Update(float dt)
 	}
 
 	ImGui::End();
-	
-	//Render
-	
-	return UPDATE_CONTINUE;
-}
 
-update_status ModuleUI::PostUpdate(float dt)
-{
 	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-
 	SDL_Window* backup_current_window = SDL_GL_GetCurrentWindow();
 	SDL_GLContext backup_current_context = SDL_GL_GetCurrentContext();
 
@@ -119,7 +125,7 @@ update_status ModuleUI::PostUpdate(float dt)
 	ImGui::RenderPlatformWindowsDefault();
 	SDL_GL_MakeCurrent(backup_current_window, backup_current_context);
 
-	return UPDATE_CONTINUE;
+	//Render
 }
 
 bool ModuleUI::CleanUp()
@@ -165,7 +171,7 @@ void ModuleUI::DrawUIBar()
 		//Window Menu
 		if (ImGui::BeginMenu("Window")) {
 			if (ImGui::MenuItem("Configuration")) {
-
+				UIManager[Congifuration_Window]->isActive[0].OpenWindow();
 			}
 			if (ImGui::MenuItem("Console")) {
 				App->console->OpenConsole();
