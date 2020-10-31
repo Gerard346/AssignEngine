@@ -72,7 +72,7 @@ update_status ModuleCamera3D::Update(float dt)
 	float Speed = 5.0f;
 
 	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT) Speed *= 2.0f;
-	if (App->input->GetKey(SDL_SCANCODE_LALT) == KEY_REPEAT) Speed *= 0.5f;
+	if (App->input->GetKey(SDL_SCANCODE_LALT) == KEY_REPEAT) Speed *= 1.0f;
 
 	float Distance = Speed * dt;
 
@@ -137,21 +137,37 @@ update_status ModuleCamera3D::Update(float dt)
 	// Mouse wheel -----------------------
 
 	float zDelta = (float)App->input->GetMouseZ();
-
+	LOG("%f", zDelta);
 	Position -= Reference;
 
-	if (zDelta < 0 && length(Position) < 500.0f)
+	if (zDelta < 0 && length(Position) < 200.0f)
 	{
-		Position += Position * 0.1f;
+		Position += Position * nav_speed;
 	}
 
-	if (zDelta > 0 && length(Position) > 0.05f)
+	if (zDelta > 0 && length(Position) > 0.01f)
 	{
-		Position -= Position * 0.1f;
+		Position -= Position * nav_speed;
 	}
 
 	Position += Reference;
 
+	//Mouse wheel button
+
+	if (App->input->GetMouseButton(SDL_BUTTON_MIDDLE) == KEY_REPEAT) {
+		if (App->input->GetMouseXMotion() > 0) {
+			Position -= X * App->input->GetMouseXMotion() * nav_speed /2;
+		}
+		if (App->input->GetMouseXMotion() < 0) {
+			Position -= X * App->input->GetMouseXMotion() * nav_speed /2;
+		}
+		if (App->input->GetMouseXMotion() > 0) {
+			Position += Y * App->input->GetMouseYMotion() * nav_speed /2;
+		}
+		if (App->input->GetMouseXMotion() > 0) {
+			Position += Y * App->input->GetMouseYMotion() * nav_speed /2;
+		}
+	}
 	// Recalculate matrix -------------
 	CalculateViewMatrix();
 

@@ -29,6 +29,8 @@ public:
 
 private:
 
+	float nav_speed = 1.1f;
+
 	mat4x4 ViewMatrix, ViewMatrixInverse;
 	PhysBody3D* following;
 	float min_following_dist;
