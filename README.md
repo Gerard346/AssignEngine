@@ -23,5 +23,6 @@ Menu bar where u can:
 	-Console with LOGs.
 	-A configuration with info of engine and hardware.
 	-About window.
+	-JSON Parser.
 
 
