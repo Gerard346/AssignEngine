@@ -41,19 +41,19 @@ void WindowBasicGeo::Draw(const char* title, bool* p_open)
 
 	if (ImGui::Button("Cube")) {
 		LOG("Loading Cube");
-		App->mesh->LoadFBX("Assets/Basic_Primitives/Cube.fbx");
+		App->mesh->LoadFBX("Engine/Assets/Basic_Primitives/Cube.fbx");
 	}
 	if (ImGui::Button("Sphere")) {
 		LOG("Loading Sphere");
-		App->mesh->LoadFBX("Assets/Basic_Primitives/Sphere.fbx");
+		App->mesh->LoadFBX("Engine/Assets/Basic_Primitives/Sphere.fbx");
 	}
 	if (ImGui::Button("Pyramid")) {
 		LOG("Loading Pyramid");
-		App->mesh->LoadFBX("Assets/Basic_Primitives/Pyramid.fbx");
+		App->mesh->LoadFBX("Engine/Assets/Basic_Primitives/Pyramid.fbx");
 	}
 	if (ImGui::Button("Cylinder")) {
 		LOG("Loading Cylinder");
-		App->mesh->LoadFBX("Assets/Basic_Primitives/Cylinder.fbx");
+		App->mesh->LoadFBX("Engine/Assets/Basic_Primitives/Cylinder.fbx");
 	}
 	if (ImGui::Button("Clear Meshes")) {
 		App->mesh->DestroyAllMeshes();
