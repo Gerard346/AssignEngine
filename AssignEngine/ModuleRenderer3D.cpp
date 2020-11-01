@@ -124,11 +124,16 @@ bool ModuleRenderer3D::Init()
 
 	//LOG
 	LOG("Vendor: %s", glGetString(GL_VENDOR));
-	LOG("Renderer: %s", glGetString(GL_RENDER));
 	LOG("OpenGL version supported %s", glGetString(GL_VERSION));
 	LOG("GLSL: %s\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
 
 	return ret;
+}
+
+bool ModuleRenderer3D::Start()
+{
+	App->mesh->LoadFBX("Engine/Assets/BakerHouse.fbx");
+	return true;
 }
 
 // PreUpdate: clear buffer

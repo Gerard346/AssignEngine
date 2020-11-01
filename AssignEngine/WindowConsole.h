@@ -25,7 +25,7 @@ public:
 	void OpenConsole();
 
 private:
-	bool isActive = false;
+	bool isActive = true;
 
 	char InputBuf[256];
 	ImVector<char*> Items;

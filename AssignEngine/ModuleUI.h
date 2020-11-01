@@ -38,6 +38,7 @@ private:
 
 private:
 	bool* p_open;
+	bool* open_rng;
 	bool rng_intT = true;
 
 	int rng_int = 0;

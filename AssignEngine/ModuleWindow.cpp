@@ -28,8 +28,8 @@ bool ModuleWindow::Init()
 	else
 	{
 		//Create window
-		int width = SCREEN_WIDTH * SCREEN_SIZE;
-		int height = SCREEN_HEIGHT * SCREEN_SIZE;
+		width = SCREEN_WIDTH * SCREEN_SIZE;
+		height = SCREEN_HEIGHT * SCREEN_SIZE;
 
 		Uint32 flags = SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN;
 
@@ -97,7 +97,88 @@ bool ModuleWindow::CleanUp()
 	return true;
 }
 
+update_status ModuleWindow::PreUpdate(float dt)
+{
+	if (want_to_resize) {
+		ResizeWindow();
+		want_to_resize = false;
+	}
+	return UPDATE_CONTINUE;
+}
+
 void ModuleWindow::SetTitle(const char* title)
 {
 	SDL_SetWindowTitle(window, title);
 }
+
+void ModuleWindow::SetFullScreen()
+{
+	fullscreen != fullscreen;
+
+	if (fullscreen) {
+		SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);
+	}
+	else {
+		SDL_SetWindowFullscreen(window, 0);
+		SDL_SetWindowSize(window, width, height);
+	}
+}
+
+void ModuleWindow::SetResizable()
+{
+	resizable != resizable;
+	if (resizable) {
+		res_sdl = SDL_TRUE;
+		//SDL_SetWindowResizable
+	}
+	else {
+		res_sdl = SDL_FALSE;
+	}
+}
+
+void ModuleWindow::SetBorderless()
+{
+	borderless != borderless;
+	if (borderless) {
+		bor_sdl = SDL_TRUE;
+		SDL_SetWindowBordered(window, bor_sdl);
+	}
+	else {
+		bor_sdl = SDL_FALSE;
+		SDL_SetWindowBordered(window, bor_sdl);
+	}
+}
+
+void ModuleWindow::setFullDesktop()
+{
+	fulldesktop != fulldesktop;
+
+	if (fulldesktop) {
+		SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
+	}
+	else {
+		SDL_SetWindowFullscreen(window, 0);
+		SDL_SetWindowSize(window, width, height);
+	}
+}
+
+void ModuleWindow::ResizeWindow()
+{
+	SDL_SetWindowSize(window, width, height);
+}
+
+void ModuleWindow::wantToresize()
+{
+	want_to_resize = true;
+}
+
+void ModuleWindow::SetBrightness(float brightness)
+{
+	SDL_SetWindowBrightness(window, brightness);
+}
+
+float ModuleWindow::GetBrightness()
+{
+	return SDL_GetWindowBrightness(window);
+}
+

@@ -110,7 +110,7 @@ void Application::PrepareUpdate()
 
 // ---------------------------------------------
 void Application::FinishUpdate()
-{
+{/*
 	avg_fps = (float)frame_count / fps_timer.ReadSec();
 
 	if (is_fps_capped) {
@@ -119,7 +119,7 @@ void Application::FinishUpdate()
 		if (delay > 0 && delay < 9000) {
 			SDL_Delay(delay);
 		}
-	}
+	}*/
 }
 
 void Application::CreatingConfigJSON()

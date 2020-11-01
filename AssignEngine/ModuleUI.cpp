@@ -82,7 +82,7 @@ void ModuleUI::DrawUI(float dt)
 	UpdateUI(dt);
 
 	//	RNG Generator
-
+	/*
 	ImGui::Begin("RNG Generator");
 	ImGui::Spacing();
 	ImGui::PushItemWidth(0.67);
@@ -116,7 +116,7 @@ void ModuleUI::DrawUI(float dt)
 	}
 
 	ImGui::End();
-
+	*/
 	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 	SDL_Window* backup_current_window = SDL_GL_GetCurrentWindow();
