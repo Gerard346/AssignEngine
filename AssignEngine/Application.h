@@ -13,6 +13,8 @@
 #include <list>
 #include "Parson/parson.h"
 #include "Timer.h"
+#include "ModuleFileSystem.h"
+
 class Application
 {
 public:
@@ -24,6 +26,8 @@ public:
 	ModuleUI* ui;
 	WindowConsole* console;
 	ModuleMesh3D* mesh;
+	ModuleFileSystem* file_system;
+
 private:
 	
 	Timer				time_since_startup;

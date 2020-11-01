@@ -330,6 +330,12 @@
     <ClInclude Include="ModuleMesh3D.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleTexture3D.h">
+      <Filter>Sources\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleFileSystem.h">
+      <Filter>Sources\Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleCamera3D.cpp">
@@ -501,6 +507,12 @@
       <Filter>Sources\Tools</Filter>
     </ClCompile>
     <ClCompile Include="ModuleMesh3D.cpp">
+      <Filter>Sources\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleTexture3D.cpp">
+      <Filter>Sources\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleFileSystem.cpp">
       <Filter>Sources\Modules</Filter>
     </ClCompile>
   </ItemGroup>

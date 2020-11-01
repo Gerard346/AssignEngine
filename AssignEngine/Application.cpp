@@ -10,6 +10,8 @@ Application::Application()
 	ui = new ModuleUI(this);
 	console = new WindowConsole(this);
 	mesh = new ModuleMesh3D(this);
+	file_system = new ModuleFileSystem(this);
+
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
 	// They will CleanUp() in reverse order
@@ -25,6 +27,7 @@ Application::Application()
 	AddModule(ui);
 
 	AddModule(mesh);
+	AddModule(file_system);
 
 	// Renderer last!
 	AddModule(renderer3D);

@@ -37,3 +37,22 @@ enum update_status
 #define WIN_FULLSCREEN_DESKTOP false
 #define VSYNC true
 #define TITLE "Assign Engine"
+
+#define RELEASE( x )\
+    {\
+       if( x != nullptr )\
+       {\
+         delete x;\
+	     x = nullptr;\
+       }\
+    }
+
+// Deletes an array of buffers
+#define RELEASE_ARRAY( x )\
+	{\
+       if( x != nullptr )\
+       {\
+           delete[] x;\
+	       x = nullptr;\
+		 }\
+	 }
