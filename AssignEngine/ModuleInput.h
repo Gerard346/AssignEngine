@@ -12,6 +12,12 @@ enum KEY_STATE
 	KEY_UP
 };
 
+enum FileType 
+{
+	Type_Unknown = 0,
+	Type_Model
+};
+
 class ModuleInput : public Module
 {
 public:
@@ -66,5 +72,9 @@ private:
 	int mouse_z;
 	int mouse_x_motion;
 	int mouse_y_motion;
+	FileType obj_filetype = FileType::Type_Unknown;
+	FileType TypeFileLoaded(const char*);
+public:
+	char* dropped_filedir = nullptr;
 	//int mouse_z_motion;
 };

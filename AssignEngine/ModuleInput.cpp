@@ -29,6 +29,8 @@ bool ModuleInput::Init()
 		ret = false;
 	}
 
+	SDL_EventState(SDL_DROPFILE, SDL_ENABLE);
+
 	return ret;
 }
 
@@ -101,6 +103,15 @@ update_status ModuleInput::PreUpdate(float dt)
 			mouse_y_motion = e.motion.yrel / SCREEN_SIZE;
 			break;
 
+		case SDL_DROPFILE:
+			dropped_filedir = e.drop.file;
+			obj_filetype = TypeFileLoaded(dropped_filedir);
+
+			switch (obj_filetype) {
+			case Type_Model:
+				App->mesh->LoadFBX(dropped_filedir);
+			}
+			break;
 		case SDL_QUIT:
 			quit = true;
 			break;
@@ -125,4 +136,27 @@ bool ModuleInput::CleanUp()
 	LOG("Quitting SDL input event subsystem");
 	SDL_QuitSubSystem(SDL_INIT_EVENTS);
 	return true;
+}
+
+FileType ModuleInput::TypeFileLoaded(const char* filename)
+{
+	if (filename != nullptr) {
+		std::string file_type;
+		std::string path = filename;
+
+		size_t extension = path.find_last_of(".");
+
+		file_type = path.substr(extension + 1);
+
+		for (std::string::iterator i = file_type.begin(); i != file_type.end(); i++) {
+			if (file_type == "fbx") {
+				LOG("File Loaded as a 3D model.");
+				return FileType::Type_Model;
+			}
+			else {
+				LOG("File not recognized. Aborting Load.");
+				return FileType::Type_Unknown;
+			}
+		}
+	}
 }

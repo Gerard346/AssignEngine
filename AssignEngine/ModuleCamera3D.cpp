@@ -86,12 +86,17 @@ update_status ModuleCamera3D::Update(float dt)
 
 	vec3 Movement;
 
-	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) Movement += Forward;
-	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) Movement -= Forward;
+	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) Movement += Up;
+	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) Movement -= Up;
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) Movement -= Right;
 	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) Movement += Right;
-	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_REPEAT) Movement += Up;
-	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT) Movement -= Up;
+	
+	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT) {
+		//TODO: Frame on gameobject.
+		vec3 pos_obj = { 0.0f, 2.0f, 20.0f };
+		mat4x4 m;
+		Look(pos_obj, m.translation());
+	}
 
 	Position += Movement;
 	Reference += Movement;
@@ -139,14 +144,14 @@ update_status ModuleCamera3D::Update(float dt)
 	float zDelta = (float)App->input->GetMouseZ();
 	Position -= Reference;
 
-	if (zDelta < 0 && length(Position) < 200.0f)
+	if (zDelta > 0)
 	{
-		Position += Position * nav_speed;
+		Position += Z * nav_speed;
 	}
 
-	if (zDelta > 0 && length(Position) > 0.01f)
+	if (zDelta < 0)
 	{
-		Position -= Position * nav_speed;
+		Position -= Z * nav_speed;
 	}
 
 	Position += Reference;
