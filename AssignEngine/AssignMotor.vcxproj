@@ -158,6 +158,7 @@
     <ClInclude Include="ModuleMesh3D.h" />
     <ClInclude Include="ModuleTexture3D.h" />
     <ClInclude Include="Timer.h" />
+    <ClInclude Include="WindowBasicGeo.h" />
     <ClInclude Include="WindowConfiguration.h" />
     <ClInclude Include="WindowConsole.h" />
     <ClInclude Include="ModuleCamera3D.h" />
@@ -223,6 +224,7 @@
     <ClCompile Include="ModuleMesh3D.cpp" />
     <ClCompile Include="ModuleTexture3D.cpp" />
     <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="WindowBasicGeo.cpp" />
     <ClCompile Include="WindowConfiguration.cpp" />
     <ClCompile Include="WindowConsole.cpp" />
     <ClCompile Include="ModuleCamera3D.cpp" />

@@ -23,6 +23,7 @@ public:
 
 	 void GenerateNewBuffer();
 	 void Draw();
+	 void Clear();
 
 public:
 	DataMesh mesh;

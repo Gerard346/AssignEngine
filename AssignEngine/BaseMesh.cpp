@@ -35,3 +35,11 @@ void BaseMesh::Draw()
 
 	glDisableClientState(GL_VERTEX_ARRAY);
 }
+
+void BaseMesh::Clear()
+{
+	//Free Buffers
+	glDeleteBuffers(1, &mesh.id_index);
+	glDeleteBuffers(1, &mesh.id_vertex);
+
+}

@@ -336,6 +336,9 @@
     <ClInclude Include="ModuleFileSystem.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
+    <ClInclude Include="WindowBasicGeo.h">
+      <Filter>Sources\Modules\UI\UIWindows</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleCamera3D.cpp">
@@ -514,6 +517,9 @@
     </ClCompile>
     <ClCompile Include="ModuleFileSystem.cpp">
       <Filter>Sources\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowBasicGeo.cpp">
+      <Filter>Sources\Modules\UI\UIWindows</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

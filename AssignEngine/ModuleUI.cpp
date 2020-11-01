@@ -10,6 +10,7 @@
 
 #include "WindowConfiguration.h"
 #include "WindowConsole.h"
+#include "WindowBasicGeo.h"
 
 ModuleUI::ModuleUI(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -36,8 +37,10 @@ bool ModuleUI::Start()
 	ImGui_ImplSDL2_InitForOpenGL(App->window->window, App->renderer3D->context);
 	
 	UIManager.push_back(new WindowConfiguration());
+	UIManager.push_back(new WindowBasicGeo());
 
 	UIManager[Congifuration_Window]->isActive[0].isActivate = false;
+	UIManager[BasicPrimitives_Window]->isActive[0].isActivate = false;
 
 	std::vector<ModuleUIManager*>::iterator ui_windows = UIManager.begin();
 
@@ -75,8 +78,6 @@ update_status ModuleUI::PostUpdate(float dt)
 
 void ModuleUI::DrawUI(float dt)
 {
-	ImGui::ShowDemoWindow();
-
 	DrawUIBar();
 	UpdateUI(dt);
 
@@ -175,6 +176,9 @@ void ModuleUI::DrawUIBar()
 			}
 			if (ImGui::MenuItem("Console")) {
 				App->console->OpenConsole();
+			}
+			if (ImGui::MenuItem("Basic Primitives")) {
+				UIManager[BasicPrimitives_Window]->isActive[0].OpenWindow();
 			}
 			ImGui::EndMenu();
 		}

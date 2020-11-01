@@ -7,7 +7,8 @@
 #include "MathGeoLib/include/Algorithm/Random/LCG.h"
 
 enum WindowsType {
-	Congifuration_Window
+	Congifuration_Window,
+	BasicPrimitives_Window
 };
 
 class ModuleUI : public Module {

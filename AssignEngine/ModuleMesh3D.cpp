@@ -99,3 +99,11 @@ bool ModuleMesh3D::CleanUp()
 
 	return true;
 }
+
+void ModuleMesh3D::DestroyAllMeshes()
+{
+	for (uint i = 0; i < meshes.size(); i++) {
+		meshes[i]->Clear();
+	}
+	meshes.clear();
+}

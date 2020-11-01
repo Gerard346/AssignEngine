@@ -21,6 +21,7 @@ public:
 
 	bool CleanUp();
 
+	void DestroyAllMeshes();
 private:
 	std::vector<BaseMesh*> meshes;
 	BaseMesh* ourMesh = nullptr;
