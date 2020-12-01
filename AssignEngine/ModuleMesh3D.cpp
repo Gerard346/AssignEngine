@@ -1,6 +1,8 @@
+#include "Application.h"
 #include "Globals.h"
 #include "ModuleMesh3D.h"
 #include "BaseMesh.h"
+#include "ModuleTexture3D.h"
 
 #include "Assimp/Assimp/include/cimport.h"
 #include "Assimp/Assimp/include/scene.h"
@@ -21,7 +23,6 @@ bool ModuleMesh3D::Start()
 	struct aiLogStream stream;
 	stream = aiGetPredefinedLogStream(aiDefaultLogStream_DEBUGGER, nullptr);
 	aiAttachLogStream(&stream);
-
 
 	return true;
 }
@@ -46,19 +47,18 @@ update_status ModuleMesh3D::PostUpdate(float dt)
 	return UPDATE_CONTINUE; 
 }
 
-bool ModuleMesh3D::LoadFBX(const char* filepath)
+bool ModuleMesh3D::LoadFBX(const char* filepath, char* texturepath)
 {
 	bool ret = false;
 
 	aiMesh* new_mesh = nullptr;
-
 	const aiScene* scene = aiImportFile(filepath, aiProcessPreset_TargetRealtime_MaxQuality);
 
 	if (scene != nullptr && scene->HasMeshes()) {
 		//Use scene.mNumMesh to iterate on scene->mMeshes array
 		for (uint i = 0; i < scene->mNumMeshes; i++) {
 
-			ourMesh = new BaseMesh();
+			ourMesh = new BaseMesh(false);
 			new_mesh = scene->mMeshes[i];
 
 			ourMesh->mesh.num_vertex = new_mesh->mNumVertices;
@@ -81,16 +81,30 @@ bool ModuleMesh3D::LoadFBX(const char* filepath)
 						memcpy(&ourMesh->mesh.index[j * 3], new_mesh->mFaces[j].mIndices, 3 * sizeof(uint));
 					}
 				}
+				if (new_mesh->HasTextureCoords(0)) {
+					ourMesh->mesh.texCoords = new float[ourMesh->mesh.num_vertex * 2];
+					for (uint k = 0; k < new_mesh->mNumVertices; k++) {
+						ourMesh->mesh.texCoords[k * 2] = new_mesh->mTextureCoords[0][k].x;
+						ourMesh->mesh.texCoords[k * 2+1] = new_mesh->mTextureCoords[0][k].y;
+					}
+					ourMesh->mesh.texPath = texturepath;
+					ourMesh->mesh.imageID = App->texture->LoadTexture(ourMesh->mesh.texPath);
+				}
+
 				ourMesh->GenerateNewBuffer();
 				meshes.push_back(ourMesh);
 			}
 		}
-
 		aiReleaseImport(scene);
-
 	}
-
 	return ret;
+}
+
+void ModuleMesh3D::ShowWire(bool wires)
+{
+	for (int i = 0; i < meshes.size(); i++) {
+		meshes[i]->SetWireframe(wires);
+	}
 }
 
 bool ModuleMesh3D::CleanUp()

@@ -1,6 +1,7 @@
 #pragma once
 #include "Module.h"
 #include "Globals.h"
+#include "Glew/include/glew.h"
 
 #define BOUNCER_TIME 200
 
@@ -21,8 +22,10 @@ public:
 public:
 
 	SDL_Texture* graphics;
-	PhysBody3D* ground;
 
 private:
+	GLubyte checkImage[64][64][4];
+	GLuint textureID;
+
 
 };

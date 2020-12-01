@@ -109,7 +109,8 @@ update_status ModuleInput::PreUpdate(float dt)
 
 			switch (obj_filetype) {
 			case Type_Model:
-				App->mesh->LoadFBX(dropped_filedir);
+				//App->mesh->LoadFBX(dropped_filedir);
+				LOG("HOLA");
 			}
 			break;
 		case SDL_QUIT:

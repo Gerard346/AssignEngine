@@ -10,6 +10,7 @@ Application::Application()
 	ui = new ModuleUI(this);
 	console = new WindowConsole(this);
 	mesh = new ModuleMesh3D(this);
+	texture = new ModuleTexture3D(this);
 	file_system = new ModuleFileSystem(this);
 
 	// The order of calls is very important!
@@ -27,6 +28,8 @@ Application::Application()
 	AddModule(ui);
 
 	AddModule(mesh);
+	AddModule(texture);
+
 	AddModule(file_system);
 
 	// Renderer last!

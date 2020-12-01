@@ -17,7 +17,9 @@ public:
 	update_status Update(float dt);
 	update_status PostUpdate(float dt);
 
-	bool LoadFBX(const char*);
+	bool LoadFBX(const char*, char*);
+
+	void ShowWire(bool wires);
 
 	bool CleanUp();
 

@@ -10,6 +10,7 @@
 #include "ModuleUI.h"
 #include "WindowConsole.h"
 #include "ModuleMesh3D.h"
+#include "ModuleTexture3D.h"
 #include <list>
 #include "Parson/parson.h"
 #include "Timer.h"
@@ -26,8 +27,9 @@ public:
 	ModuleUI* ui;
 	WindowConsole* console;
 	ModuleMesh3D* mesh;
+	ModuleTexture3D* texture;
 	ModuleFileSystem* file_system;
-
+	
 private:
 	
 	Timer				time_since_startup;
