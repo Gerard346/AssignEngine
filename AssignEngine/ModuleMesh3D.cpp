@@ -87,8 +87,14 @@ bool ModuleMesh3D::LoadFBX(const char* filepath, char* texturepath)
 						ourMesh->mesh.texCoords[k * 2] = new_mesh->mTextureCoords[0][k].x;
 						ourMesh->mesh.texCoords[k * 2+1] = new_mesh->mTextureCoords[0][k].y;
 					}
-					ourMesh->mesh.texPath = texturepath;
-					ourMesh->mesh.imageID = App->texture->LoadTexture(ourMesh->mesh.texPath);
+					if (texturepath != nullptr) {
+						ourMesh->mesh.texPath = texturepath;
+						ourMesh->mesh.imageID = App->texture->LoadTexture(ourMesh->mesh.texPath);
+					}
+				}
+				if (new_mesh->HasNormals()) {
+					ourMesh->mesh.normals = new float[ourMesh->mesh.num_vertex * 3];
+					memcpy(ourMesh->mesh.normals, new_mesh->mNormals, sizeof(float) * ourMesh->mesh.num_vertex * 3);
 				}
 
 				ourMesh->GenerateNewBuffer();
@@ -104,6 +110,14 @@ void ModuleMesh3D::ShowWire(bool wires)
 {
 	for (int i = 0; i < meshes.size(); i++) {
 		meshes[i]->SetWireframe(wires);
+	}
+}
+
+void ModuleMesh3D::ShowNormals()
+{
+	for (int i = 0; i < meshes.size(); i++) {
+		meshes[i]->SeeNormalsFace();
+		meshes[i]->SeeNormalsVertex();
 	}
 }
 

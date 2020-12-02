@@ -22,6 +22,11 @@ struct DataMesh {
 	uint imageID = 0;
 	float* texCoords = nullptr;
 	char* texPath = nullptr;
+
+	uint id_normals = 0;
+	float* normals = nullptr;
+	bool see_vertex_normals = false;
+	bool see_face_normals = false;
 };
 
 
@@ -32,9 +37,17 @@ public:
 	virtual ~BaseMesh();
 
 	 virtual void GenerateNewBuffer();
+
 	 void AssignTexture(uint);
 	 void AssignCheckersImage();
+
 	 bool SetWireframe(bool w);
+
+	 void SeeNormalsVertex();
+	 void DrawNormalsVertex();
+
+	 void SeeNormalsFace();
+	 void DrawNormalsFace();
 
 	 void Draw();
 	 void Clear();

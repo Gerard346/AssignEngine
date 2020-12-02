@@ -41,9 +41,14 @@ update_status ModuleScene::Update(float dt)
 	float3 pos = { 1, 1, 1 };
 	float3 size = { 1, 1, 1 };
 
-	if (App->input->GetKey(SDL_SCANCODE_G)) {
+	if (App->input->GetKey(SDL_SCANCODE_G) ==KEY_DOWN) {
 		App->mesh->ShowWire(true);
 	}
-
+	if (App->input->GetKey(SDL_SCANCODE_G)== KEY_DOWN) {
+		App->renderer3D->EnableTextures();
+	}
+	if (App->input->GetKey(SDL_SCANCODE_N) == KEY_DOWN) {
+		App->mesh->ShowNormals();
+	}
 	return UPDATE_CONTINUE;
 }

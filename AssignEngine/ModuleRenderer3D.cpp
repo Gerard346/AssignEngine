@@ -132,8 +132,8 @@ bool ModuleRenderer3D::Init()
 
 bool ModuleRenderer3D::Start()
 {
-	App->mesh->LoadFBX("Engine/Assets/Suzanne.fbx", "Engine/Assets/Lenna.png");
-	App->mesh->LoadFBX("Engine/Assets/BakerHouse.fbx", "Engine/Assets/Baker_house.png");
+	//App->mesh->LoadFBX("Engine/Assets/Suzanne.fbx", "Engine/Assets/Lenna.png");
+	//App->mesh->LoadFBX("Engine/Assets/BakerHouse.fbx", "Engine/Assets/Baker_house.png");
 
 	return true;
 }
@@ -200,4 +200,9 @@ void ModuleRenderer3D::OnResize(int width, int height)
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
+}
+
+void ModuleRenderer3D::EnableTextures()
+{
+	show_textures = !show_textures;
 }

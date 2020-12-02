@@ -17,9 +17,10 @@ public:
 	update_status Update(float dt);
 	update_status PostUpdate(float dt);
 
-	bool LoadFBX(const char*, char*);
+	bool LoadFBX(const char*, char* texturepath = nullptr);
 
 	void ShowWire(bool wires);
+	void ShowNormals();
 
 	bool CleanUp();
 

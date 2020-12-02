@@ -23,10 +23,13 @@ public:
 	void Draw();
 
 	void OnResize(int width, int height);
+	void EnableTextures();
 
 public:
 	Light lights[MAX_LIGHTS];
 	SDL_GLContext context;
 	mat3x3 NormalMatrix;
 	mat4x4 ModelMatrix, ViewMatrix, ProjectionMatrix;
+
+	bool show_textures = true;
 };
