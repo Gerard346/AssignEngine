@@ -2,6 +2,7 @@
 #include "Globals.h"
 #include <string>
 #include "MathGeoLib/include/MathGeoLib.h"
+#include "Glew/include/glew.h"
 
 struct DataMesh {
 	~DataMesh() {
@@ -56,5 +57,6 @@ public:
 public:
 	DataMesh mesh;
 	bool wireframe = false;
+	GLubyte checkImage[CHECKERS_HEIGHT][CHECKERS_WIDTH][4];
 
 };

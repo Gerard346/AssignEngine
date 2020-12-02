@@ -91,6 +91,9 @@ bool ModuleMesh3D::LoadFBX(const char* filepath, char* texturepath)
 						ourMesh->mesh.texPath = texturepath;
 						ourMesh->mesh.imageID = App->texture->LoadTexture(ourMesh->mesh.texPath);
 					}
+					else {
+						ourMesh->AssignCheckersImage();
+					}
 				}
 				if (new_mesh->HasNormals()) {
 					ourMesh->mesh.normals = new float[ourMesh->mesh.num_vertex * 3];

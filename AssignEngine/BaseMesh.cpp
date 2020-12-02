@@ -41,6 +41,8 @@ void BaseMesh::GenerateNewBuffer()
 	glGenBuffers(1, (GLuint*)&(mesh.textureID));
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh.textureID);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(float) * mesh.num_vertex * 2, mesh.texCoords, GL_STATIC_DRAW);
+
+	glGenerateMipmap(GL_TEXTURE_2D);
 }
 
 
@@ -48,37 +50,36 @@ void BaseMesh::AssignTexture(uint texID)
 {
 }
 
+
 void BaseMesh::Draw()
 {
 	if (mesh.num_vertex > 0 && mesh.num_index > 0) {
+		glEnableClientState(GL_VERTEX_ARRAY);
+		glEnableClientState(GL_NORMAL_ARRAY);
+		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
 		if (wireframe) {
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		}
+
+		glBindBuffer(GL_ARRAY_BUFFER, mesh.id_vertex);
+		glVertexPointer(3, GL_FLOAT, 0, NULL);
 
 		glBindBuffer(GL_NORMAL_ARRAY, mesh.id_normals);
 		glNormalPointer(GL_FLOAT, 0, NULL);
 
 		if (mesh.texCoords != nullptr) {
 			if (App->renderer3D->show_textures) {
+				AssignCheckersImage();
 				//Texture
-				glEnable(GL_TEXTURE_2D);
-				glBindTexture(GL_TEXTURE_2D, 0);
 				glBindTexture(GL_TEXTURE_2D, mesh.imageID);
 
-				glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 				glBindBuffer(GL_ARRAY_BUFFER, mesh.textureID);
 				glTexCoordPointer(2, GL_FLOAT, 0, NULL);
 			}
 		}
 
-		glBindBuffer(GL_NORMAL_ARRAY, mesh.id_normals);
-		glNormalPointer(GL_FLOAT, 0, NULL);
-
-		glEnableClientState(GL_VERTEX_ARRAY);
-		glBindBuffer(GL_ARRAY_BUFFER, mesh.id_vertex);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh.id_index);
-		glVertexPointer(3, GL_FLOAT, 0, NULL);
 		glDrawElements(GL_TRIANGLES, mesh.num_index, GL_UNSIGNED_INT, NULL);
 		glBindTexture(GL_TEXTURE_2D, 0);
 
@@ -119,9 +120,7 @@ void BaseMesh::ClearTextures()
 {
 }
 
-void BaseMesh::AssignCheckersImage()
-{
-}
+
 
 bool BaseMesh::SetWireframe(bool wires)
 {
@@ -174,4 +173,23 @@ void BaseMesh::DrawNormalsFace()
 	}
 
 	glEnd();
+}
+
+void BaseMesh::AssignCheckersImage()
+{
+	for (int i = 0; i < CHECKERS_HEIGHT; i++) {
+		for (int j = 0; j < CHECKERS_WIDTH; j++) {
+			int c = ((((i & 0x8) == 0) ^ (((j & 0x8)) == 0))) * 255;
+			checkImage[i][j][0] = (GLubyte)c;
+			checkImage[i][j][1] = (GLubyte)c;
+			checkImage[i][j][2] = (GLubyte)c;
+			checkImage[i][j][3] = (GLubyte)255;
+		}
+	}
+
+	glBindTexture(GL_TEXTURE_2D, mesh.imageID);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, CHECKERS_WIDTH, CHECKERS_HEIGHT, 0, GL_RGBA, GL_UNSIGNED_BYTE, checkImage);
+	glBindTexture(GL_TEXTURE_2D, 0);
+
+
 }

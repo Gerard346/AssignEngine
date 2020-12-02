@@ -37,6 +37,8 @@ enum update_status
 #define WIN_FULLSCREEN_DESKTOP false
 #define VSYNC true
 #define TITLE "Assign Engine"
+#define CHECKERS_WIDTH 64
+#define CHECKERS_HEIGHT 64
 
 #define RELEASE( x )\
     {\

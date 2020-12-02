@@ -133,7 +133,8 @@ bool ModuleRenderer3D::Init()
 bool ModuleRenderer3D::Start()
 {
 	//App->mesh->LoadFBX("Engine/Assets/Suzanne.fbx", "Engine/Assets/Lenna.png");
-	//App->mesh->LoadFBX("Engine/Assets/BakerHouse.fbx", "Engine/Assets/Baker_house.png");
+	App->mesh->LoadFBX("Engine/Assets/BakerHouse.fbx", "Engine/Assets/Baker_house.png");
+	App->mesh->LoadFBX("Engine/Assets/Basic_Primitives/Cube.fbx");
 
 	return true;
 }
