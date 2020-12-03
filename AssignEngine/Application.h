@@ -32,19 +32,10 @@ public:
 	
 private:
 	
-	Timer				time_since_startup;
-	Timer				frame_time;
-	Timer				fps_timer;
-	Timer				timer_psec;
-	uint				capped_frames;
-	uint32_t			curr_frames = NULL;
-	float				avg_fps = 0.0f;
-	float				seconds_since_startup = 0.0f;
-	uint64_t			frame_count = 0.0f;
-	uint32_t			last_frame_ms = 0.0f;
-	uint32_t			frames_on_last_update = 0.0f;
+	Timer ms_timer;
 	float				dt;
-
+	float fps;
+	float fps_capped;
 	bool is_fps_capped = true;
 
 	std::list<Module*> list_modules;
@@ -59,7 +50,9 @@ public:
 	bool CleanUp();
 
 	float GetFPS();
-	float GetMS();
+	float GetLastDt();
+	void SetFPS(int);
+	int GetFPSCapped();
 
 	JSON_Value* config_value;
 	JSON_Object* config_object;

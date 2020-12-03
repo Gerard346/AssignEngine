@@ -9,6 +9,8 @@ WindowConfiguration::WindowConfiguration() :ModuleUIManager()
 
 WindowConfiguration::~WindowConfiguration()
 {
+	fps_log.clear();
+	ms_log.clear();
 	isActive.clear();
 }
 
@@ -16,7 +18,8 @@ bool WindowConfiguration::Start()
 {
 	name_engine = "Assign Engine";
 	name_organization = "CITM - UPC";
-
+	fps_log.resize(100, 0);
+	ms_log.resize(100, 0);
 	return true;
 }
 
@@ -33,6 +36,9 @@ update_status WindowConfiguration::Update(float dt)
 
 bool WindowConfiguration::CleanUp()
 {
+	fps_log.clear();
+	ms_log.clear();
+
 	return true;
 }
 
@@ -45,8 +51,24 @@ void WindowConfiguration::Draw(const char* title, bool *p_open)
 	if (ImGui::CollapsingHeader("Application")) {
 		ImGui::Text("Name Of The Engine: %s", name_engine);
 		ImGui::Text("Organization: %s", name_organization);
+		
+		static int capped_fps = App->GetFPS();
+		if (ImGui::SliderInt("Max FPS", &capped_fps, 0, 120)) {
+			App->SetFPS(capped_fps);
+		}
 
-		//ImGui::Text("Framerate %.1 f", )
+		char title[25];
+		//Fps
+		fps_log.erase(fps_log.begin());
+		fps_log.push_back(App->GetFPS());
+		sprintf_s(title, 25, "Framerate %1.f", fps_log[fps_log.size() - 1]);
+		ImGui::PlotHistogram("##framerate", &fps_log[0], fps_log.size(), 0, title, 0.0f, 100.0f, ImVec2(310, 100));
+
+		//Ms
+		ms_log.erase(ms_log.begin());
+		ms_log.push_back(App->GetLastDt() * 1000);
+		sprintf_s(title, 25, "Milliseconds %0.1f", ms_log[ms_log.size() - 1]);
+		ImGui::PlotHistogram("##milliseconds", &ms_log[0], ms_log.size(), 0, title, 0.0f, 40.0f, ImVec2(310, 100));
 	}
 	if (ImGui::CollapsingHeader("Window")) {
 		float brightness = App->window->GetBrightness();

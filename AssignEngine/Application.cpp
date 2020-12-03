@@ -52,7 +52,7 @@ bool Application::Init()
 	bool ret = true;
 	//max_fps = 60;
 
-	frame_time.Start();
+	ms_timer.Start();
 
 	config_value = json_parse_file("config.json");
 
@@ -93,36 +93,19 @@ bool Application::Init()
 // ---------------------------------------------
 void Application::PrepareUpdate()
 {
-	dt = frame_time.ReadSec();
-	if (dt > 0.2f) {
-		dt = 0.0f;
-	}
-
-	last_frame_ms = dt * 1000;
-	frame_time.Start();
-
-	frame_count += 1;
-	curr_frames += 1;
-
-	if (timer_psec.Read() >= 1000) {
-		frames_on_last_update = curr_frames;
-		curr_frames = 0;
-		timer_psec.Start();
-	}
+	dt = (float)ms_timer.ReadSec();
+	fps = 1.0f / dt;
+	ms_timer.Start();
 }
 
 // ---------------------------------------------
 void Application::FinishUpdate()
-{/*
-	avg_fps = (float)frame_count / fps_timer.ReadSec();
+{
+	Uint32 last_frame_ms = ms_timer.Read();
 
-	if (is_fps_capped) {
-		float delay = (1000 / capped_frames) - frame_time.Read();
-
-		if (delay > 0 && delay < 9000) {
-			SDL_Delay(delay);
-		}
-	}*/
+	if (last_frame_ms < fps_capped) {
+		SDL_Delay(fps_capped - last_frame_ms);
+	}
 }
 
 void Application::CreatingConfigJSON()
@@ -208,12 +191,22 @@ bool Application::CleanUp()
 
 float Application::GetFPS()
 {
-	return frames_on_last_update;
+	return fps;
 }
 
-float Application::GetMS()
+float Application::GetLastDt()
 {
-	return last_frame_ms;
+	return dt;
+}
+
+void Application::SetFPS(int fps_cap)
+{
+	fps_capped = 1000 / fps_cap;
+}
+
+int Application::GetFPSCapped()
+{
+	return 1000/fps_capped;
 }
 
 void Application::AddModule(Module* mod)
